@@ -18,19 +18,22 @@
   body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
-    /* Adding a subtle noise overlay here for that premium feel, like Linear */
+    /* Subtle noise overlay creates depth and reduces the flat feeling of pure colors */
+    /* Inspired by premium design systems like Linear and Vercel */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
   }
 }
 
 @layer utilities {
   .bg-card-gradient {
-    /* Subtle radial gradient mesh for the cards */
+    /* Subtle radial gradient mesh adds visual interest without being distracting */
+    /* Keeps the dark aesthetic clean while adding depth */
     background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.03) 0%, transparent 70%),
                 var(--bg-card);
   }
 
-  /* Custom pulse animation for loading skeleton */
+  /* Organic pulse animation for loading skeletons */
+  /* Uses cubic-bezier for a natural ease-in-out effect */
   .animate-organic-pulse {
     animation: organic-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }

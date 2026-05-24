@@ -2,8 +2,29 @@
 
 import { motion } from "framer-motion"
 import { Flame } from "lucide-react"
+import { useMemo } from "react"
+
+const greetings = [
+  { greeting: "Welcome back", emoji: "👋" },
+  { greeting: "Happy to see you", emoji: "😊" },
+  { greeting: "Let's learn something new", emoji: "🚀" },
+  { greeting: "Ready to level up?", emoji: "⚡" },
+  { greeting: "Great to have you here", emoji: "🎯" },
+]
+
+const names = ["Alex", "Jordan", "Casey", "Morgan", "Riley"]
 
 export function HeroTile({ streak = 4 }: { streak?: number }) {
+  // Deterministic selection based on time (changes daily) to feel dynamic but consistent within session
+  const { greeting, emoji, name } = useMemo(() => {
+    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000)
+    return {
+      greeting: greetings[dayOfYear % greetings.length].greeting,
+      emoji: greetings[dayOfYear % greetings.length].emoji,
+      name: names[dayOfYear % names.length],
+    }
+  }, [])
+
   return (
     <article className="col-span-1 md:col-span-2 relative overflow-hidden rounded-2xl bg-card-gradient border border-border-subtle p-6 md:p-8 flex flex-col justify-center min-h-[200px]">
       {/* Subtle gradient mesh background */}
@@ -15,11 +36,24 @@ export function HeroTile({ streak = 4 }: { streak?: number }) {
         transition={{ type: "spring", stiffness: 300, damping: 24 }}
         className="relative z-10"
       >
-        <h1 className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight">
-          Welcome back, Alex.
+        <div className="flex items-baseline gap-2 mb-1">
+          <span className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight">
+            {greeting}
+          </span>
+          <motion.span
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 2, delay: 0.3 }}
+            className="text-3xl md:text-4xl"
+          >
+            {emoji}
+          </motion.span>
+        </div>
+        
+        <h1 className="text-3xl md:text-4xl font-bold text-accent mb-2">
+          {name}.
         </h1>
         
-        <p className="mt-2 text-text-secondary text-lg">
+        <p className="text-text-secondary text-lg">
           You&apos;ve learned for {streak} days in a row. Keep the momentum going!
         </p>
         

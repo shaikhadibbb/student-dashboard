@@ -6,18 +6,18 @@ import { LayoutDashboard, BookOpen, Activity, Settings, User } from "lucide-reac
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { id: "dashboard", icon: LayoutDashboard },
-  { id: "courses", icon: BookOpen },
-  { id: "activity", icon: Activity },
-  { id: "profile", icon: User },
-  { id: "settings", icon: Settings },
+  { id: "dashboard", icon: LayoutDashboard, label: "Dashboard", active: true },
+  { id: "courses", icon: BookOpen, label: "Courses", active: false },
+  { id: "activity", icon: Activity, label: "Activity", active: false },
+  { id: "profile", icon: User, label: "Profile", active: false },
+  { id: "settings", icon: Settings, label: "Settings", active: false },
 ]
 
 export function MobileNav() {
   const [activeItem, setActiveItem] = useState("dashboard")
 
   return (
-    <nav className="md:hidden fixed bottom-0 left-0 right-0 h-[64px] bg-bg-secondary border-t border-border-subtle z-50 pb-safe">
+    <nav className="md:hidden fixed bottom-0 left-0 right-0 h-[64px] bg-bg-secondary border-t border-border-subtle z-50 pb-safe" aria-label="Mobile navigation">
       <div className="flex items-center justify-around h-full px-2">
         {navItems.map((item) => {
           const isActive = activeItem === item.id;
@@ -27,12 +27,18 @@ export function MobileNav() {
             <button
               key={item.id}
               onClick={() => setActiveItem(item.id)}
+              disabled={!item.active}
               className={cn(
                 "relative flex items-center justify-center w-12 h-12 rounded-xl transition-colors",
-                isActive ? "text-white" : "text-text-secondary hover:text-text-primary"
+                isActive && item.active
+                  ? "text-white" 
+                  : item.active
+                  ? "text-text-secondary hover:text-text-primary"
+                  : "text-text-secondary/50 cursor-not-allowed opacity-60"
               )}
-              aria-label={item.id}
+              aria-label={item.label}
               aria-current={isActive ? "page" : undefined}
+              title={!item.active ? "Coming soon" : item.label}
             >
               {isActive && (
                 <motion.div

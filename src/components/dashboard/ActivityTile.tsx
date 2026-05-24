@@ -7,11 +7,11 @@ const WEEKS = 5
 const DAYS = 7
 
 export function ActivityTile() {
-  // Generate deterministic mock data (same on every render)
+  // Generate deterministic mock data (same on every render, pseudo-random but consistent)
   const activityData = useMemo(() => {
     return Array.from({ length: WEEKS * DAYS }, (_, i) => ({
       id: i,
-      level: Math.floor((Math.abs(Math.sin(i * 1234.5678)) * 1.5) + (i % 3 === 0 ? 1 : 0)) % 4, // 0-3 activity level, pseudo-random but stable
+      level: Math.floor((Math.abs(Math.sin(i * 1234.5678)) * 1.5) + (i % 3 === 0 ? 1 : 0)) % 4,
     }))
   }, [])
 
@@ -27,10 +27,12 @@ export function ActivityTile() {
         <span className="text-sm text-text-secondary">Last 5 weeks</span>
       </div>
       
-      {/* GitHub-style grid: 7 rows (days), 5 columns (weeks) */}
+      {/* GitHub-style contribution grid: 7 rows (days), 5 columns (weeks) */}
       <div 
         className="grid grid-rows-7 grid-flow-col gap-1 md:gap-1.5"
         style={{ gridTemplateRows: `repeat(7, minmax(0, 1fr))` }}
+        role="img"
+        aria-label="Learning activity heatmap for the last 5 weeks"
       >
         {activityData.map((day) => (
           <motion.div
@@ -41,15 +43,16 @@ export function ActivityTile() {
               scale: 1.3,
               transition: { type: "spring", stiffness: 400, damping: 15 }
             }}
-            title={`Activity level: ${day.level}`}
+            title={`Activity level: ${day.level} out of 3`}
+            aria-label={`Activity level: ${day.level}`}
           />
         ))}
       </div>
       
-      {/* Day labels */}
+      {/* Activity level legend */}
       <div className="flex gap-4 mt-3 text-xs text-text-secondary">
         <span>Less</span>
-        <div className="flex gap-1">
+        <div className="flex gap-1" role="presentation">
           {[0.1, 0.3, 0.6, 1.0].map((op, i) => (
             <div key={i} className="w-3 h-3 rounded-sm bg-accent" style={{ opacity: op }} />
           ))}
