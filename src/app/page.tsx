@@ -24,8 +24,8 @@ export default async function DashboardPage() {
     <div className="flex min-h-screen bg-bg-primary pb-20 md:pb-0">
       <Sidebar />
       
-      <main className="flex-1 p-6 lg:p-8">
-        <div className="max-w-6xl mx-auto space-y-5">
+      <main className="flex-1 p-8 lg:p-10">
+        <div className="max-w-6xl mx-auto space-y-6">
           <HeroTile />
           
           <CourseGrid>
