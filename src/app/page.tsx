@@ -25,14 +25,16 @@ export default async function DashboardPage() {
       <Sidebar />
       
       <main className="flex-1 p-8 lg:p-10">
-        <div className="max-w-6xl mx-auto space-y-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           <HeroTile />
           
-          <CourseGrid>
-            {courses?.map((course) => (
-              <CourseTile key={course.id} course={course} />
-            ))}
-          </CourseGrid>
+          <div className="col-span-1 md:col-span-2">
+            <CourseGrid>
+              {courses?.map((course) => (
+                <CourseTile key={course.id} course={course} />
+              ))}
+            </CourseGrid>
+          </div>
           
           <ActivityTile />
         </div>
