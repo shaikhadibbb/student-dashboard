@@ -8,10 +8,12 @@ const DAYS = 7;
 
 export function ActivityTile() {
   const activityData = useMemo(() => {
-    return Array.from({ length: WEEKS * DAYS }, (_, i) => ({
-      id: i,
-      level: Math.floor(Math.random() * 5), // 0-4
-    }));
+    return Array.from({ length: WEEKS * DAYS }, (_, i) => {
+      // Deterministic pseudo-random level between 0 and 4 to prevent SSR hydration mismatches
+      const val = Math.sin(i * 1234.5678) * 10000;
+      const level = Math.floor((val - Math.floor(val)) * 5);
+      return { id: i, level };
+    });
   }, []);
 
   const getOpacity = (level: number) => {
