@@ -39,7 +39,7 @@ export function CourseGrid({ children }: { children: ReactNode }) {
   // Prevent hydration mismatch by rendering static grid first
   if (!mounted) {
     return (
-      <section className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 opacity-0">
+      <section className="grid grid-cols-1 sm:grid-cols-2 gap-6 opacity-0">
         {children}
       </section>
     )
@@ -47,7 +47,7 @@ export function CourseGrid({ children }: { children: ReactNode }) {
 
   return (
     <motion.section
-      className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6"
+      className="grid grid-cols-1 sm:grid-cols-2 gap-6"
       variants={containerVariants}
       initial="hidden"
       animate="show"

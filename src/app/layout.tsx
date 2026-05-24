@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Student Dashboard",
-  description: "A premium student dashboard built with Next.js and Framer Motion.",
+  title: "Atlas Student",
+  description: "A premium student learning dashboard with real-time course tracking.",
 };
 
 export default function RootLayout({
@@ -28,9 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-bg-primary text-text-primary min-h-screen selection:bg-accent/30`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a0a0f] text-white min-h-screen selection:bg-indigo-500/30`}
       >
-        {/* Global noise texture */}
+        {/* Global noise texture for depth */}
         <div 
           className="fixed inset-0 pointer-events-none z-50 opacity-[0.015]"
           style={{
@@ -38,7 +38,7 @@ export default function RootLayout({
           }}
         />
         <Sidebar />
-        <main className="md:ml-[64px] lg:ml-[240px] pb-[64px] md:pb-0 min-h-screen transition-all duration-300">
+        <main className="md:ml-[64px] lg:ml-[260px] pb-[64px] md:pb-0 min-h-screen transition-all duration-300">
           {children}
         </main>
         <MobileNav />

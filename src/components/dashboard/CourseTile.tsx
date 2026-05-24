@@ -26,7 +26,7 @@ export function CourseTile({ course }: { course: Course }) {
 
   return (
     <motion.article 
-      className="relative overflow-hidden rounded-2xl bg-card-gradient border border-border-subtle p-5 md:p-6 group cursor-pointer h-full flex flex-col justify-between transition-all hover:border-accent-glow/50"
+      className="relative overflow-hidden rounded-3xl bg-[#111118] border border-white/[0.04] p-6 group cursor-pointer h-full flex flex-col justify-between transition-all hover:border-indigo-500/20"
       whileHover={{ 
         scale: 1.02,
         transition: { type: "spring", stiffness: 300, damping: 20 }
@@ -36,23 +36,27 @@ export function CourseTile({ course }: { course: Course }) {
     >
       {/* Hardware-accelerated hover glow overlay */}
       <motion.div 
-        className="absolute inset-0 rounded-2xl border border-accent-glow opacity-0 group-hover:opacity-100 pointer-events-none"
+        className="absolute inset-0 rounded-3xl border border-indigo-500/20 opacity-0 group-hover:opacity-100 pointer-events-none"
         transition={{ duration: 0.3 }}
       />
       
-      {/* Icon with hardware-accelerated hover background */}
-      <div className="relative w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 overflow-hidden mb-4">
-        <motion.div 
-          className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100"
-          transition={{ duration: 0.3 }}
-        />
-        <IconComponent className="w-5 h-5 text-accent-glow relative z-10" />
+      {/* Top row: Icon + Percentage */}
+      <div className="flex items-center justify-between mb-6 relative z-10">
+        <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10">
+          <IconComponent className="w-6 h-6 text-indigo-400" />
+        </div>
+        <span className="text-gray-400 text-sm font-medium">{course.progress}%</span>
       </div>
       
-      <h3 className="text-lg font-semibold text-text-primary truncate" title={course.title}>
+      {/* Title */}
+      <h3 className="text-lg font-semibold text-white truncate mb-1 relative z-10" title={course.title}>
         {course.title}
       </h3>
+
+      {/* Status */}
+      <p className="text-gray-500 text-sm mb-6 relative z-10">In progress</p>
       
+      {/* Progress bar — thinner and more elegant */}
       <ProgressBar progress={course.progress} />
     </motion.article>
   )

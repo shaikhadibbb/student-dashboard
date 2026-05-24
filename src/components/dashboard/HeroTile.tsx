@@ -2,75 +2,40 @@
 
 import { motion } from "framer-motion"
 import { Flame } from "lucide-react"
-import { useMemo } from "react"
 
-const greetings = [
-  { greeting: "Welcome back", emoji: "👋" },
-  { greeting: "Happy to see you", emoji: "😊" },
-  { greeting: "Let's learn something new", emoji: "🚀" },
-  { greeting: "Ready to level up?", emoji: "⚡" },
-  { greeting: "Great to have you here", emoji: "🎯" },
-]
-
-const names = ["Alex", "Jordan", "Casey", "Morgan", "Riley"]
-
-export function HeroTile({ streak = 4 }: { streak?: number }) {
-  // Deterministic selection based on time (changes daily) to feel dynamic but consistent within session
-  const { greeting, emoji, name } = useMemo(() => {
-    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000)
-    return {
-      greeting: greetings[dayOfYear % greetings.length].greeting,
-      emoji: greetings[dayOfYear % greetings.length].emoji,
-      name: names[dayOfYear % names.length],
-    }
-  }, [])
-
+export function HeroTile({ streak = 12 }: { streak?: number }) {
   return (
-    <article className="col-span-1 md:col-span-2 relative overflow-hidden rounded-2xl bg-card-gradient border border-border-subtle p-6 md:p-8 flex flex-col justify-center min-h-[200px]">
-      {/* Subtle gradient mesh background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none" />
+    <article className="col-span-1 md:col-span-2 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#16162a] via-[#111118] to-[#0a0a0f] border border-white/[0.04] p-8 min-h-[240px] flex items-center">
+      {/* Blurred accent orb — premium depth effect */}
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
       
       <motion.div
-        initial={{ opacity: 0.01, y: 20 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        className="relative z-10"
+        className="relative z-10 flex items-center justify-between w-full gap-8"
       >
-        <div className="flex items-baseline gap-2 mb-1">
-          <span className="text-3xl md:text-4xl font-bold text-text-primary tracking-tight">
-            {greeting}
-          </span>
-          <motion.span
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 2, delay: 0.3 }}
-            className="text-3xl md:text-4xl"
-          >
-            {emoji}
-          </motion.span>
+        {/* Left side: greeting and description */}
+        <div className="max-w-lg flex-1">
+          <h1 className="text-4xl font-bold text-white tracking-tight leading-tight mb-1">
+            Welcome back, Alex.
+          </h1>
+          
+          <p className="text-lg text-gray-400 leading-relaxed">
+            You're 3 lessons away from finishing Advanced React Patterns. Keep the streak alive — momentum is the whole game.
+          </p>
         </div>
-        
-        <h1 className="text-3xl md:text-4xl font-bold text-accent mb-2">
-          {name}.
-        </h1>
-        
-        <p className="text-text-secondary text-lg">
-          You&apos;ve learned for {streak} days in a row. Keep the momentum going!
-        </p>
-        
-        {/* Streak Badge */}
+
+        {/* Right side: Streak Card — LARGE, prominent centerpiece */}
         <motion.div 
-          className="flex items-center gap-2 mt-4 w-fit bg-orange-500/10 border border-orange-500/20 px-4 py-2 rounded-full"
-          animate={{ 
-            boxShadow: [
-              "0 0 0px rgba(249, 115, 22, 0)",
-              "0 0 20px rgba(249, 115, 22, 0.15)",
-              "0 0 0px rgba(249, 115, 22, 0)"
-            ]
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          className="flex flex-col items-center justify-center bg-[#0a0a0f]/80 border border-white/[0.06] rounded-2xl px-8 py-6 min-w-[140px] backdrop-blur-sm shrink-0"
+          whileHover={{ scale: 1.05, transition: { type: "spring", stiffness: 300, damping: 20 } }}
         >
-          <Flame className="w-5 h-5 text-orange-500" />
-          <span className="text-orange-500 text-sm font-semibold">{streak} Day Streak</span>
+          <div className="flex items-center gap-2 mb-2">
+            <Flame className="w-5 h-5 text-orange-500" />
+            <span className="text-4xl font-bold text-white">{streak}</span>
+          </div>
+          <span className="text-gray-500 text-xs uppercase tracking-widest font-medium">Day Streak</span>
         </motion.div>
       </motion.div>
     </article>
