@@ -18,7 +18,7 @@ export function HeroTile({ streak = 12 }: { streak?: number }) {
         {/* Left: Text */}
         <div className="max-w-xl flex-1">
           <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight leading-tight">
-            Welcome back, Alex.
+            Welcome back, Adib.
           </h1>
           <p className="mt-4 text-lg text-gray-400 leading-relaxed">
             You're 3 lessons away from finishing Advanced React Patterns. Keep the streak alive — momentum is the whole game.
