@@ -1,27 +1,30 @@
 export default function Loading() {
   return (
-    <div className="p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full pt-8 md:pt-10">
-      <div className="mb-8 animate-organic-pulse">
-        <div className="h-8 w-48 bg-white/5 rounded-lg mb-2" />
-        <div className="h-4 w-64 bg-white/5 rounded-lg" />
+    <div className="flex min-h-screen bg-bg-primary">
+      {/* Sidebar skeleton */}
+      <div className="w-[260px] h-screen bg-bg-secondary border-r border-border-subtle hidden md:block">
+        <div className="p-4 space-y-4">
+          <div className="h-10 bg-white/5 rounded-xl animate-pulse" />
+          <div className="space-y-2">
+            {[1,2,3,4,5].map(i => (
+              <div key={i} className="h-10 bg-white/5 rounded-xl animate-pulse" />
+            ))}
+          </div>
+        </div>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-        {/* Hero Tile Skeleton */}
-        <div className="col-span-1 md:col-span-2 h-[200px] rounded-2xl bg-white/5 border border-white/5 animate-organic-pulse" />
+      
+      {/* Main content skeleton */}
+      <main className="flex-1 p-6 lg:p-8 space-y-5">
+        {/* Hero skeleton */}
+        <div className="h-[240px] rounded-3xl bg-bg-card border border-border-subtle animate-pulse" />
         
-        {/* Course Tile Skeletons */}
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div 
-            key={i} 
-            className="col-span-1 h-[160px] rounded-2xl bg-white/5 border border-white/5 animate-organic-pulse" 
-            style={{ animationDelay: `${i * 150}ms` }}
-          />
-        ))}
-
-        {/* Activity Tile Skeleton */}
-        <div className="col-span-1 md:col-span-2 h-[200px] rounded-2xl bg-white/5 border border-white/5 animate-organic-pulse" />
-      </div>
+        {/* Course grid skeleton */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {[1,2,3,4].map(i => (
+            <div key={i} className="h-[200px] rounded-3xl bg-bg-card border border-border-subtle animate-pulse" />
+          ))}
+        </div>
+      </main>
     </div>
-  )
+  );
 }

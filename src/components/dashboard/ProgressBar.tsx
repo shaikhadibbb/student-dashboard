@@ -1,27 +1,24 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
-interface ProgressBarProps {
-  progress: number
-}
-
-export function ProgressBar({ progress }: ProgressBarProps) {
-  const [mounted, setMounted] = useState(false)
+export function ProgressBar({ progress }: { progress: number }) {
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    const timer = setTimeout(() => setMounted(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <div className="w-full bg-white/5 rounded-full h-1.5 overflow-hidden border border-white/5 relative">
+    <div className="w-full bg-white/5 rounded-full h-1.5 overflow-hidden mt-auto">
       <motion.div
-        className="absolute inset-y-0 left-0 w-full rounded-full bg-gradient-to-r from-emerald-500 to-teal-400 origin-left"
+        className="h-full rounded-full bg-gradient-to-r from-success to-success-glow origin-left"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: mounted ? progress / 100 : 0 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
       />
     </div>
-  )
+  );
 }

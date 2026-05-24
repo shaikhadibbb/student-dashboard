@@ -2,48 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --bg-primary: #0a0a0f;
-    --bg-secondary: #111118;
-    --bg-card: #16161f;
-    --border-subtle: rgba(255, 255, 255, 0.06);
-    --border-glow: rgba(99, 102, 241, 0.3);
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
-    --accent: #6366f1;
-    --accent-glow: #818cf8;
-  }
+:root {
+  --bg-primary: #050507;
+  --bg-secondary: #0a0a0f;
+  --bg-card: #111118;
+  --border-subtle: rgba(255,255,255,0.04);
+  --border-glow: rgba(99,102,241,0.2);
+}
 
+@layer base {
   body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    /* Subtle noise overlay creates depth and reduces the flat feeling of pure colors */
-    /* Inspired by premium design systems like Linear and Vercel */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    @apply bg-bg-primary text-text-primary antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-@layer utilities {
+@layer components {
   .bg-card-gradient {
-    /* Subtle radial gradient mesh adds visual interest without being distracting */
-    /* Keeps the dark aesthetic clean while adding depth */
-    background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.03) 0%, transparent 70%),
-                var(--bg-card);
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%);
   }
+}
 
-  /* Organic pulse animation for loading skeletons */
-  /* Uses cubic-bezier for a natural ease-in-out effect */
-  .animate-organic-pulse {
-    animation: organic-pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-  
-  @keyframes organic-pulse {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: .6;
-    }
-  }
+/* Noise texture overlay */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }

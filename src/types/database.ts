@@ -47,3 +47,18 @@ export interface Database {
     }
   }
 }
+
+export interface Course {
+  id: string;
+  title: string;
+  progress: number;
+  icon_name: string;
+  created_at: string;
+}
+
+export type IconName = 
+  | "Code2" 
+  | "Database" 
+  | "Brain" 
+  | "Palette" 
+  | "BookOpen";

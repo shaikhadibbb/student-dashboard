@@ -1,88 +1,96 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { LayoutDashboard, BookOpen, Activity, Settings, User } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  LayoutDashboard,
+  BookOpen,
+  GraduationCap,
+  BarChart3,
+  Settings,
+  PanelLeft,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const navItems = [
-  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard, active: true },
-  { id: "courses", label: "Courses", icon: BookOpen, active: false },
-  { id: "activity", label: "Activity", icon: Activity, active: false },
-  { id: "profile", label: "Profile", icon: User, active: false },
-  { id: "settings", label: "Settings", icon: Settings, active: false },
-]
+  { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { id: "courses", label: "Courses", icon: BookOpen },
+  { id: "grades", label: "Grades", icon: GraduationCap },
+  { id: "analytics", label: "Analytics", icon: BarChart3 },
+  { id: "settings", label: "Settings", icon: Settings },
+];
 
 export function Sidebar() {
-  const [activeItem, setActiveItem] = useState("dashboard")
+  const [activeItem, setActiveItem] = useState("courses");
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <nav className="hidden md:flex flex-col h-screen fixed left-0 top-0 border-r border-white/[0.04] bg-[#0a0a0f] z-50 w-[64px] lg:w-[260px] transition-all duration-300" aria-label="Main navigation">
-      {/* Branding section */}
-      <div className="flex items-center gap-3 px-4 py-5 lg:px-6 border-b border-white/[0.04]">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center shrink-0 font-bold text-white">
-          A
+    <nav
+      className={cn(
+        "h-screen bg-[#0a0a0f] border-r border-white/[0.04] flex flex-col hidden md:flex",
+        collapsed ? "w-[80px]" : "w-[280px]"
+      )}
+    >
+      {/* Logo */}
+      <div className="flex items-center gap-3 px-5 py-6 mb-4">
+        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#6366f1] to-[#a855f7] flex items-center justify-center shrink-0">
+          <span className="text-white font-bold text-lg">A</span>
         </div>
-        <div className="hidden lg:block">
-          <h1 className="text-white font-semibold text-sm tracking-wide">Atlas</h1>
-          <p className="text-gray-600 text-xs uppercase tracking-widest">Student</p>
-        </div>
+        {!collapsed && (
+          <div>
+            <h1 className="text-white font-semibold text-base tracking-wide">Atlas</h1>
+            <p className="text-gray-500 text-xs uppercase tracking-[0.15em]">Student</p>
+          </div>
+        )}
       </div>
 
-      {/* Navigation items */}
-      <div className="flex-1 mt-6 px-2 space-y-2 lg:px-4">
+      {/* Nav items — LARGE, SPACIOUS */}
+      <div className="px-3 space-y-2">
         {navItems.map((item) => {
-          const isActive = activeItem === item.id
-          const Icon = item.icon
-
+          const isActive = activeItem === item.id;
           return (
-            <div key={item.id} className="relative group">
-              <button
-                onClick={() => setActiveItem(item.id)}
-                disabled={!item.active}
-                className={cn(
-                  "relative flex items-center w-full p-3 rounded-lg transition-colors",
-                  isActive && item.active 
-                    ? "text-white" 
-                    : item.active
-                    ? "text-gray-400 hover:text-gray-300"
-                    : "text-gray-600 cursor-not-allowed opacity-50"
-                )}
-                aria-label={item.label}
-                aria-current={isActive ? "page" : undefined}
-                title={!item.active ? "Coming soon" : item.label}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute inset-0 bg-white/5 rounded-lg"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
-                
-                <div className="relative z-10 flex items-center justify-center lg:justify-start w-full">
-                  <Icon className="w-5 h-5 shrink-0" />
-                  <span className="ml-3 hidden lg:block font-medium text-sm">{item.label}</span>
-                  {!item.active && <span className="ml-auto text-xs lg:hidden text-gray-500">Soon</span>}
-                </div>
-              </button>
-              
-              {/* Tooltip for mobile/tablet */}
-              {item.active && (
-                <div className="absolute left-14 bg-[#111118] border border-white/[0.06] px-2 py-1 rounded text-sm opacity-0 group-hover:opacity-100 lg:hidden pointer-events-none transition-opacity z-50 whitespace-nowrap">
-                  {item.label}
-                </div>
+            <button
+              key={item.id}
+              onClick={() => setActiveItem(item.id)}
+              className={cn(
+                "relative flex items-center w-full px-4 py-3.5 rounded-2xl text-base font-medium transition-all duration-200",
+                isActive
+                  ? "text-white"
+                  : "text-gray-400 hover:text-white hover:bg-white/[0.02]"
               )}
-              {!item.active && (
-                <div className="absolute left-14 bg-[#111118] border border-white/[0.06] px-2 py-1 rounded text-sm opacity-0 group-hover:opacity-100 lg:hidden pointer-events-none transition-opacity z-50 whitespace-nowrap">
-                  Coming soon
-                </div>
+            >
+              {isActive && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute inset-0 bg-[#16161f] rounded-2xl border border-[#6366f1]/30"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  style={{
+                    boxShadow: "0 0 20px rgba(99, 102, 241, 0.1), inset 0 1px 0 rgba(255,255,255,0.05)"
+                  }}
+                />
               )}
-            </div>
-          )
+              <item.icon className={cn(
+                "w-5 h-5 relative z-10 shrink-0",
+                isActive ? "text-white" : "text-gray-500"
+              )} />
+              {!collapsed && (
+                <span className="relative z-10 ml-3.5">{item.label}</span>
+              )}
+            </button>
+          );
         })}
       </div>
+
+      {/* Collapse button at bottom */}
+      <div className="mt-auto p-4 border-t border-white/[0.04]">
+        <button
+          onClick={() => setCollapsed(!collapsed)}
+          className="flex items-center gap-2 text-gray-500 hover:text-white text-sm transition-colors w-full"
+        >
+          <PanelLeft className={cn("w-4 h-4", collapsed && "rotate-180")} />
+          {!collapsed && <span>Collapse</span>}
+        </button>
+      </div>
     </nav>
-  )
+  );
 }
