@@ -50,10 +50,8 @@ Open [http://localhost:3000](http://localhost:3000) and you should be good to go
 
 ## Deployment
 
-The app is fully deployed on Vercel. You can check out the live version here:
-**[Insert Vercel URL Here]**
+The app is fully deployed on Vercel. You can check out the live version here: [https://student-dashboard-21me1qq22-shaikhadibbbs-projects.vercel.app/](https://student-dashboard-21me1qq22-shaikhadibbbs-projects.vercel.app/)**
 
 ---
 
 *P.S. I left a few comments in the code explaining my thought process. Let me know what you think!*
-
