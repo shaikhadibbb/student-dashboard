@@ -1,10 +1,10 @@
-# ⚡️ Atlas Student Dashboard (Internship Challenge!)
+# Atlas Student Dashboard (Internship Challenge)
 
 Hey there! This is my submission for the frontend internship challenge. I spent the last few days building a dark-themed student dashboard from scratch. My main goal was to make it look super polished (very inspired by premium tools like Vercel and Linear) and extremely fast.
 
 Live link: [https://student-dashboard-21me1qq22-shaikhadibbbs-projects.vercel.app/](https://student-dashboard-21me1qq22-shaikhadibbbs-projects.vercel.app/)
 
-## 🛠️ The Tech Stack I Used
+## The Tech Stack I Used
 
 - **Next.js 15 (App Router)** - I opted for the latest Next.js because Server Components are amazing for loading speed.
 - **Supabase** - Used PostgreSQL to store the courses table. The database queries run directly inside Next.js Server Components.
@@ -14,7 +14,7 @@ Live link: [https://student-dashboard-21me1qq22-shaikhadibbbs-projects.vercel.ap
 
 ---
 
-## 🏗️ How I Structured the App (and why)
+## How I Structured the App (and why)
 
 I decided to keep the layout clean and highly performant by putting the actual server-side queries inside `src/app/page.tsx` itself. 
 The data is pulled from Supabase on the server side using the `@supabase/ssr` package. When a user requests the page:
@@ -29,7 +29,7 @@ Once the data reaches the client, interactive client-side components take over:
 
 ---
 
-## ⚡️ Challenges & What I Learned
+## Challenges & What I Learned
 
 1. **Next.js 15 Cookie API gotcha**: In Next.js 15, the `cookies()` API became asynchronous. I had to make sure the Supabase server client `await`s the cookies store rather than calling it synchronously, which took some debugging!
 2. **Hydration Flickers**: Framer Motion's entrance animations caused a tiny flash of unstyled content or hydration mismatch because the client rendered different initial animations than the static server-rendered output. I fixed this in `CourseGrid.tsx` by waiting until the component successfully mounts (`useEffect` flag) before triggering the stagger container variant.
@@ -37,7 +37,7 @@ Once the data reaches the client, interactive client-side components take over:
 
 ---
 
-## 🚀 Setting it up locally
+## Setting it up locally
 
 If you want to run this project locally:
 
