@@ -2,7 +2,7 @@
 
 This is a modern, dark-themed learning dashboard built to explore performant data fetching and fluid UI transitions in Next.js 15. The project integrates Supabase for persistence, Tailwind for styling, and Framer Motion for spring-based interactive states.
 
-Live link: [https://student-dashboard-21me1qq22-shaikhadibbbs-projects.vercel.app/](https://student-dashboard-21me1qq22-shaikhadibbbs-projects.vercel.app/)
+Live link: [https://student-dashboard-4qffu3u9h-shaikhadibbbs-projects.vercel.app/](https://student-dashboard-4qffu3u9h-shaikhadibbbs-projects.vercel.app/)
 
 ---
 
